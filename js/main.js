@@ -28,7 +28,7 @@ function getAjax() {
 
   $.ajax({
 
-    url: 'https://api.themoviedb.org/3/movie/343611?api_key=5f8ff056928df0cbe99f1c1b48acd6a5',
+    url: 'https://api.themoviedb.org/3/movie/343611?api_key=5f8ff056928df0cbe99f1c1b48acd6a5' + search,
     method: "GET",
     success: function (data, stato) {
 
@@ -42,7 +42,7 @@ function getAjax() {
       var sourceTransfert = Handlebars.compile(source);
 
       var objectsContent = {
-        
+
       }
 
 
