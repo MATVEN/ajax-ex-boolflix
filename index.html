@@ -10,36 +10,47 @@
 
       <div class="container-fluid box-content">
 
-        <div class="row">
-
-          <form>
-            <div class="form-row align-items-center">
-              <div class="col-auto">
-                <label class="sr-only" for="inlineFormInput">Film e Serie TV</label>
-                <input type="text" class="form-control mb-2 bar" id="inlineFormInput js-searchval" placeholder="Film e Serie TV">
-              </div>
-              <div class="col-auto">
-                <button type="submit" class="btn btn-primary mb-2" id="js-search">Search</button>
-              </div>
+        <div class="row row-style">
+          <div class="form-row align-items-center">
+            <div class="col-auto">
+              <label class="sr-only" for="inlineFormInput">Film e Serie TV</label>
+              <input type="text" class="form-control mb-2 bar" id="js-searchval" placeholder="Film e Serie TV">
             </div>
-          </form>
-
+            <div class="col-auto">
+              <button type="submit" class="btn btn-primary mb-2" id="js-search">Search</button>
+            </div>
+          </div>
         </div>
+
+        <div class="row">
+            <div class="film-container">
+
+            </div>
+         </div>
+
       </div>
 
       <!-- CDN jQ & Handlebars -->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
 
       <!-- handlebars -->
       <script id="tv-template" type="text/x-handlebars-template">
-        <div class="ms_cardFilm">
-          <h1>{{titolo}}</h1>
-          <h4>{{titoloOrginale}}</h4>
-          <h5>{{lingua}}</h5>
-          <h6>{{voto}}</h6>
+        <div class="film-box">
+          <div class="film-img">
+            <img src="https://image.tmdb.org/t/p/w500/{{cover}}" alt="{{titolo}}">
+          </div>
+          <div class="film-info">
+            <h3><span class="info"><strong>Titolo: {{title}}</strong></span></h3>
+            <ul>
+              <li>Titolo Originale: {{originalTitle}}</li>
+              <li>Lingua: {{language}}</li>
+              <li>Voto: {{vote}}</li>
+            </ul>
+          </div>
         </div>
       </script>
+
 
 
     <script type="text/javascript" src="js/main.js"></script>

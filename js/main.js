@@ -22,18 +22,17 @@ $(document).ready(function (){
 
 // ajax call function
 function getAjax() {
-
   // input value
   var search = $('#js-searchval').val();
 
   $.ajax({
 
-    url: 'https://api.themoviedb.org/3/movie/343611?api_key=5f8ff056928df0cbe99f1c1b48acd6a5' + search,
+    url: 'https://api.themoviedb.org/3/search/movie?api_key=5f8ff056928df0cbe99f1c1b48acd6a5&query=' + search,
     method: "GET",
     success: function (data, stato) {
 
       var list = data.results;
-      console.log("Lista film:", list);
+      console.log(list);
 
       var objects;
 
@@ -41,12 +40,30 @@ function getAjax() {
 
       var sourceTransfert = Handlebars.compile(source);
 
-      var objectsContent = {
 
-      }
+      list.forEach(objects =>{
 
+      // DEBUG:
+        console.log("URL immagine:", objects.backdrop_path);
+        console.log("Titolo:", objects.title) ;
+        console.log("Titolo originale:", objects.original_title);
+        console.log("Lingua:", objects.original_language);
+        console.log("Voto:", objects.vote_average);
 
+        // handlebars objects data
+        var objectsContent = {
+          cover: objects.backdrop_path,
+          title: objects.title,
+          originalTitle: objects.original_title,
+          language: objects.original_language,
+          vote: objects.vote_average
+        }
 
+        var stamp =  sourceTransfert(objectsContent);
+
+        $(".film-container").append(stamp);
+
+      });
 
     },
 
