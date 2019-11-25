@@ -13,11 +13,46 @@
 $(document).ready(function (){
 
   // selection button
-  var search = $('#js-search');
+  var btnSearch = $('#js-search');
 
   // ajax call to click
-  search.click(getAjax);
+  btnSearch.click(getAjax);
 
 });
 
 // ajax call function
+function getAjax() {
+
+  // input value
+  var search = $('#js-searchval').val();
+
+  $.ajax({
+
+    url: 'https://api.themoviedb.org/3/movie/343611?api_key=5f8ff056928df0cbe99f1c1b48acd6a5',
+    method: "GET",
+    success: function (data, stato) {
+
+      var list = data.results;
+      console.log("Lista film:", list);
+
+      var objects;
+
+      var source = $("#tv-template").html();
+
+      var sourceTransfert = Handlebars.compile(source);
+
+      var objectsContent = {
+        
+      }
+
+
+
+
+    },
+
+    error: function (request, status, error) {
+      alert("Errore. " + " " + request + " " + status + " " + error);
+    }
+  })
+
+}
