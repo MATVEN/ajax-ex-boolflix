@@ -18,9 +18,13 @@ $(document).ready(function (){
   // ajax call to click
   btnSearch.click(getAjax);
 
+  // svuota il contenuto di calendar e evita la concatenazione
+  $(".film-container").html("")
+
+
 });
 
-// ajax call function
+// ajax call function film
 function getAjax() {
   // input value
   var search = $('#js-searchval').val();
@@ -31,8 +35,72 @@ function getAjax() {
     method: "GET",
     success: function (data, stato) {
 
-      var list = data.results;
-      console.log(list);
+      var filmList = data.results;
+      console.log(filmList);
+
+      var objects;
+
+      var source = $("#tv-template").html();
+
+      var sourceTransfert = Handlebars.compile(source);
+
+
+      filmList.forEach(objects =>{
+
+      // DEBUG:
+        console.log("URL immagine:", objects.backdrop_path);
+        console.log("Titolo:", objects.title) ;
+        console.log("Titolo originale:", objects.original_title);
+        console.log("Lingua:", objects.original_language);
+        console.log("Voto:", objects.vote_average);
+
+        // convert rating
+         var stars = (Math.round(objects.vote_average / 2));
+
+         // language film
+         var flag = objects.original_language;
+
+        // handlebars objects data
+        var objectsContent = {
+          cover: objects.backdrop_path,
+          title: objects.title,
+          originalTitle: objects.original_title,
+          language: languageFlag(flag),
+          vote: objects.vote_average,
+          stars: starVote(stars)
+        }
+
+        var stamp =  sourceTransfert(objectsContent);
+
+        $(".film-container").append(stamp);
+
+      });
+
+      // Svuoto il campo di ricerca
+          $("#js-searchVal").val("");
+
+    },
+
+    error: function (request, status, error) {
+      alert("Errore. " + " " + request + " " + status + " " + error);
+    }
+  })
+
+}
+
+// ajax call function series
+function getAjax() {
+  // input value
+  var search = $('#js-searchval').val();
+
+  $.ajax({
+
+    url: 'https://api.themoviedb.org/3/search/tv?api_key=5f8ff056928df0cbe99f1c1b48acd6a5&query=' + search,
+    method: "GET",
+    success: function (data, stato) {
+
+      var tvSeriesList = data.results;
+      console.log(tvSeriesList);
 
       var objects;
 
@@ -54,26 +122,30 @@ function getAjax() {
          var stars = (Math.round(objects.vote_average / 2));
 
          // language film
-         var languageFlag = objects.original_language;
+         var flag = objects.original_language;
 
         // handlebars objects data
         var objectsContent = {
           cover: objects.backdrop_path,
           title: objects.title,
           originalTitle: objects.original_title,
-          language: objects.original_language,
+          language: languageFlag(flag),
           vote: objects.vote_average,
           stars: starVote(stars)
         }
 
+        // stamp results on page
         var stamp =  sourceTransfert(objectsContent);
 
-        $(".film-container").append(stamp);
+        $(".tvseries-container").append(stamp);
+
+        // clean page to nw search
+        $(".tvseries-container").html("");
 
       });
 
       // Svuoto il campo di ricerca
-          $("#js-searchVal").val("");
+        $("#js-searchVal").val("");
 
     },
 
@@ -100,3 +172,29 @@ function starVote(star) {
     }
     return rating;
 }
+
+function languageFlag(flag){
+   var flagImg;
+
+   switch (flag) {
+
+     case "en":
+           flagImg = '<img src="img/language/english.jpg">';
+           break;
+       case "it":
+           flagImg = '<img src="img/language/italian.jpg">';
+           break;
+       case "de":
+           flagImg = '<img src="img/language/deutsch.jpg">';
+           break;
+       case "fr":
+           flagImg = '<img src="img/language/french.jpg">';
+           break;
+       case "es":
+           flagImg = '<img src="img/language/spanish.jpg">';
+           break;
+       default:
+           flagImg = '';
+   }
+   return flagImg;
+};

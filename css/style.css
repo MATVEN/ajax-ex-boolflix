@@ -5,7 +5,6 @@
 }
 
 .box-content{
-  padding: 0px 10px;
   width: 100%;
   background-color: darkgrey;
 }
@@ -20,4 +19,14 @@
 .film-container{
   flex-wrap: wrap;
   justify-content: center;
+}
+
+.film-box{
+  margin: 10px;
+}
+
+.language-icon img{
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
 }
