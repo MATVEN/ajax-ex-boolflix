@@ -16,23 +16,25 @@ $(document).ready(function (){
   var btnSearch = $('#js-search');
 
   // ajax call to click
-  btnSearch.click(getAjax);
-
-  // svuota il contenuto di calendar e evita la concatenazione
-  $(".film-container").html("")
-
+  btnSearch.click(getAjaxFilm);
+  btnSearch.click(getAjaxTvSeries);
 
 });
 
 // ajax call function film
-function getAjax() {
+function getAjaxFilm() {
   // input value
   var search = $('#js-searchval').val();
 
   $.ajax({
 
-    url: 'https://api.themoviedb.org/3/search/movie?api_key=5f8ff056928df0cbe99f1c1b48acd6a5&query=' + search,
+    url: 'https://api.themoviedb.org/3/search/movie',
     method: "GET",
+    data: {
+      api_key: '5f8ff056928df0cbe99f1c1b48acd6a5',
+      query: search,
+      language: "it-IT"
+    },
     success: function (data, stato) {
 
       var filmList = data.results;
@@ -70,9 +72,13 @@ function getAjax() {
           stars: starVote(stars)
         }
 
+        // stamp results on page
         var stamp =  sourceTransfert(objectsContent);
 
         $(".film-container").append(stamp);
+
+        // clean page to new search
+        $(".film-container").html("");
 
       });
 
@@ -89,14 +95,19 @@ function getAjax() {
 }
 
 // ajax call function series
-function getAjax() {
+function getAjaxTvSeries() {
   // input value
   var search = $('#js-searchval').val();
 
   $.ajax({
 
-    url: 'https://api.themoviedb.org/3/search/tv?api_key=5f8ff056928df0cbe99f1c1b48acd6a5&query=' + search,
+    url: 'https://api.themoviedb.org/3/search/tv' + search,
     method: "GET",
+    data: {
+      api_key: '5f8ff056928df0cbe99f1c1b48acd6a5',
+      query: search,
+      language: "it-IT"
+    },
     success: function (data, stato) {
 
       var tvSeriesList = data.results;
@@ -139,7 +150,7 @@ function getAjax() {
 
         $(".tvseries-container").append(stamp);
 
-        // clean page to nw search
+        // clean page to new search
         $(".tvseries-container").html("");
 
       });
