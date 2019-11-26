@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
     <title>Boolflix</title>
   </head>
   <body>
@@ -38,17 +39,16 @@
       <script id="tv-template" type="text/x-handlebars-template">
         <div class="film-box">
           <div class="film-img">
-            <img src="https://image.tmdb.org/t/p/w500/{{cover}}" alt="{{titolo}}">
+            <img src="https://image.tmdb.org/t/p/w500{{cover}}" alt="{{titolo}}">
           </div>
           <div class="film-info">
             <h3><span class="info"><strong>Titolo: {{title}}</strong></span></h3>
             <ul>
               <li>Titolo Originale: {{originalTitle}}</li>
               <li>Lingua: {{language}}</li>
-              <li>Voto: {{vote}}</li>
+              <li><span>Voto: {{vote}}</span> <span class="rating">{{{stars}}}</span></li>
             </ul>
           </div>
-        </div>
       </script>
 
 

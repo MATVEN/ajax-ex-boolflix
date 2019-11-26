@@ -50,13 +50,20 @@ function getAjax() {
         console.log("Lingua:", objects.original_language);
         console.log("Voto:", objects.vote_average);
 
+        // convert rating
+         var stars = (Math.round(objects.vote_average / 2));
+
+         // language film
+         var languageFlag = objects.original_language;
+
         // handlebars objects data
         var objectsContent = {
           cover: objects.backdrop_path,
           title: objects.title,
           originalTitle: objects.original_title,
           language: objects.original_language,
-          vote: objects.vote_average
+          vote: objects.vote_average,
+          stars: starVote(stars)
         }
 
         var stamp =  sourceTransfert(objectsContent);
@@ -65,6 +72,9 @@ function getAjax() {
 
       });
 
+      // Svuoto il campo di ricerca
+          $("#js-searchVal").val("");
+
     },
 
     error: function (request, status, error) {
@@ -72,4 +82,21 @@ function getAjax() {
     }
   })
 
+}
+
+// other objects function
+
+function starVote(star) {
+    // stampa stelle
+    var rating = '';
+    for (var i = 1; i <= 5; i++) {
+        if (i <= star) {
+            console.log(i, "full");
+            rating += '<i class="fas fa-star"></i>';
+        } else {
+            console.log(i, "empty");
+            rating += '<i class="far fa-star"></i>';
+        }
+    }
+    return rating;
 }
