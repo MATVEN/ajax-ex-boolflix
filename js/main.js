@@ -83,7 +83,7 @@ function getAjaxFilm() {
       });
 
       // Svuoto il campo di ricerca
-          $("#js-searchVal").val("");
+      $("#js-searchVal").val("");
 
     },
 
@@ -124,8 +124,8 @@ function getAjaxTvSeries() {
 
       // DEBUG:
         console.log("URL immagine:", objects.backdrop_path);
-        console.log("Titolo:", objects.title) ;
-        console.log("Titolo originale:", objects.original_title);
+        console.log("Titolo:", objects.name) ;
+        console.log("Titolo originale:", objects.original_name);
         console.log("Lingua:", objects.original_language);
         console.log("Voto:", objects.vote_average);
 
@@ -138,8 +138,8 @@ function getAjaxTvSeries() {
         // handlebars objects data
         var objectsContent = {
           cover: objects.backdrop_path,
-          title: objects.title,
-          originalTitle: objects.original_title,
+          title: objects.name,
+          originalTitle: objects.original_name,
           language: languageFlag(flag),
           vote: objects.vote_average,
           stars: starVote(stars)
@@ -156,7 +156,7 @@ function getAjaxTvSeries() {
       });
 
       // Svuoto il campo di ricerca
-        $("#js-searchVal").val("");
+      $("#js-searchVal").val("");
 
     },
 
