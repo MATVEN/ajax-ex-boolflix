@@ -101,7 +101,7 @@ function getAjaxTvSeries() {
 
   $.ajax({
 
-    url: 'https://api.themoviedb.org/3/search/tv' + search,
+    url: 'https://api.themoviedb.org/3/search/tv',
     method: "GET",
     data: {
       api_key: '5f8ff056928df0cbe99f1c1b48acd6a5',
@@ -118,7 +118,6 @@ function getAjaxTvSeries() {
       var source = $("#tv-template").html();
 
       var sourceTransfert = Handlebars.compile(source);
-
 
       list.forEach(objects =>{
 
