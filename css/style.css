@@ -6,27 +6,113 @@
 
 .box-content{
   width: 100%;
-  background-color: darkgrey;
+  height: 100vh;
+  background-color: black;
+}
+
+.name-app img{
+  width: 200px;
+  height: 65px;
+  left: 0;
 }
 
 .row-style{
+  width: 100%;
   background-color: black;
   padding: 10px;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.general-container{
+  width: 100%;
+  padding-left: 15px;
+}
+
+.type{
+  color: white;
+  padding: 5px 20px;
 }
 
 .film-container{
-  flex-wrap: wrap;
-  justify-content: center;
+  display: flex;
+  flex-direction: row;
+  overflow: auto;
 }
 
-.film-box{
-  margin: 10px;
+.tvseries-container{
+  display: flex;
+  flex-direction: row;
+  overflow: auto;
+}
+
+::-webkit-scrollbar {
+ width: 6px;
+}
+
+::-webkit-scrollbar-track {
+ background: black;
+}
+
+::-webkit-scrollbar-thumb {
+ background: black;
+}
+
+::-webkit-scrollbar-thumb:hover {
+ background: #DB202C;
+}
+
+.card-box{
+  background-color: black;
+  border-radius: 10px;
+  padding: 5px;
+  position: relative;
+  display: flex;
 }
 
 .language-icon img{
   width: 20px;
   height: 20px;
   border-radius: 100%;
+}
+ .card-img{
+   width: 342px!important;
+ }
+
+.card-img img{
+  border-radius: 10px;
+}
+
+.film-info{
+  width: 100%;
+  height: 100%;
+  color: white;
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-box:hover .film-info{
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.film-info h3{
+  font-size: 20px;
+
+}
+
+ul{
+  list-style-type: none;
+}
+
+.rating i{
+  color: yellow;
 }

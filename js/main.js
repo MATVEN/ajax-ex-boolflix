@@ -16,15 +16,25 @@ $(document).ready(function (){
   var btnSearch = $('#js-search');
 
   // ajax call to click
-  btnSearch.click(getAjaxFilm);
-  btnSearch.click(getAjaxTvSeries);
+  btnSearch.click(function() {
+    getAjaxFilm();
+    getAjaxTvSeries();
+  });
+
+  getAjaxFilm('batman');
+  getAjaxTvSeries('batman');
 
 });
 
 // ajax call function film
-function getAjaxFilm() {
-  // input value
-  var search = $('#js-searchval').val();
+function getAjaxFilm(search) {
+  // se non viene passato nulla alla funzione cerco come al solito
+  if(!search) {
+    search = $('#js-searchval').val();
+  }
+
+  // clean page to new search
+  $(".film-container").html("");
 
   $.ajax({
 
@@ -67,7 +77,7 @@ function getAjaxFilm() {
           cover: objects.backdrop_path,
           title: objects.title,
           originalTitle: objects.original_title,
-          language: languageFlag(flag),
+          languageflag: languageFlag(flag),
           vote: objects.vote_average,
           stars: starVote(stars)
         }
@@ -76,9 +86,6 @@ function getAjaxFilm() {
         var stamp =  sourceTransfert(objectsContent);
 
         $(".film-container").append(stamp);
-
-        // clean page to new search
-        $(".film-container").html("");
 
       });
 
@@ -95,9 +102,14 @@ function getAjaxFilm() {
 }
 
 // ajax call function series
-function getAjaxTvSeries() {
-  // input value
-  var search = $('#js-searchval').val();
+function getAjaxTvSeries(search) {
+  // se non viene passato nulla alla funzione cerco come al solito
+  if(!search) {
+    search = $('#js-searchval').val();
+  }
+
+  // clean page to new search
+  $(".tvseries-container").html("");
 
   $.ajax({
 
@@ -119,7 +131,7 @@ function getAjaxTvSeries() {
 
       var sourceTransfert = Handlebars.compile(source);
 
-      list.forEach(objects =>{
+      tvSeriesList.forEach(objects =>{
 
       // DEBUG:
         console.log("URL immagine:", objects.backdrop_path);
@@ -139,7 +151,7 @@ function getAjaxTvSeries() {
           cover: objects.backdrop_path,
           title: objects.name,
           originalTitle: objects.original_name,
-          language: languageFlag(flag),
+          languageflag: languageFlag(flag),
           vote: objects.vote_average,
           stars: starVote(stars)
         }
@@ -148,9 +160,6 @@ function getAjaxTvSeries() {
         var stamp =  sourceTransfert(objectsContent);
 
         $(".tvseries-container").append(stamp);
-
-        // clean page to new search
-        $(".tvseries-container").html("");
 
       });
 
